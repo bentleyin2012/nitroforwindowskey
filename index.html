@@ -1,0 +1,297 @@
+<!-- Property of Bentley. DONT STEAL. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nitro for Windows 11 Pro</title>
+    <style>
+        /* General reset and body styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Whitney', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #2C2F33;
+            color: #FFFFFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container styling */
+        .container {
+            background-color: #36393F;
+            border-radius: 12px;
+            width: 460px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .container:hover {
+            transform: scale(1.03);
+        }
+
+        /* Header with Logos */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .header img {
+            height: 40px;
+        }
+
+        h1 {
+            color: #7289DA;
+            font-size: 26px;
+            margin: 0;
+            font-weight: 700;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        /* Stages styling */
+        .stage {
+            display: none;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        .stage.active {
+            display: block;
+        }
+
+        /* Input and Button Styling */
+        input[type="text"], input[type="url"], input[type="email"] {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #4F545C;
+            border-radius: 5px;
+            background-color: #202225;
+            color: #FFFFFF;
+            font-size: 14px;
+            box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
+        }
+
+        input::placeholder {
+            color: #72767D;
+        }
+
+        button {
+            width: 100%;
+            background-color: #5865F2;
+            color: #FFFFFF;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #4752C4;
+            transform: scale(1.02);
+        }
+
+        /* Progress bar and timeline */
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            padding: 10px 0;
+        }
+
+        .timeline .circle {
+            background-color: #4F545C;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #FFFFFF;
+            transition: background-color 0.3s, color 0.3s;
+            z-index: 10;
+        }
+
+        .timeline .circle.active {
+            background-color: #7289DA;
+            color: #FFFFFF;
+        }
+
+        .timeline .line {
+            position: absolute;
+            top: 22px;
+            left: 12px;
+            right: 12px;
+            height: 2px;
+            background-color: #4F545C;
+            z-index: 1;
+        }
+
+        .timeline .progress-bar {
+            background-color: #7289DA;
+            height: 2px;
+            width: 0%;
+            position: absolute;
+            top: 22px;
+            left: 12px;
+            right: 12px;
+            z-index: 2;
+            transition: width 0.3s;
+        }
+
+        /* Wumpus Styling */
+        .wumpus {
+            display: none;
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 150px;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .wumpus.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* No Scam Guarantee */
+        .no-scam {
+            background-color: #202225;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: left;
+            font-size: 14px;
+            color: #B9BBBE;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .no-scam h3 {
+            color: #43B581;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .no-scam img {
+            height: 20px;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        /* Additional animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fadeIn {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container fadeIn">
+        <div class="header">
+            <img src="https://i.imgur.com/qXQAzEn.png" alt="Windows Logo">
+            <h1>Nitro for Windows 11 Pro</h1>
+            <img src="https://i.imgur.com/T8PT1eC.png" alt="Discord Logo">
+        </div>
+
+        <!-- Timeline and Progress Bar -->
+        <div class="timeline">
+            <div class="circle active">1</div>
+            <div class="circle">2</div>
+            <div class="circle">3</div>
+            <div class="circle">4</div>
+            <div class="line"></div>
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="stage active" id="stage1">
+            <p>Welcome! To begin, please enter your Discord username.</p>
+            <input type="text" id="username" placeholder="Discord Username#1234">
+            <button onclick="nextStage(1)">Next</button>
+        </div>
+
+        <div class="stage" id="stage2">
+            <p>Fantastic! Now, paste your Discord Nitro gift link below.</p>
+            <input type="url" id="nitroLink" placeholder="https://discord.gift/yourlink">
+            <button onclick="nextStage(2)">Next</button>
+        </div>
+
+        <div class="stage" id="stage3">
+            <p>Great! Provide your email address to receive the Windows 11 Pro key.</p>
+            <input type="email" id="email" placeholder="your.email@example.com">
+            <button onclick="nextStage(3)">Next</button>
+        </div>
+
+        <div class="stage" id="stage4">
+            <p>You're all set! Click the button below to complete the trade.</p>
+            <button onclick="finishTrade()">Finish</button>
+        </div>
+
+        <div class="stage" id="stage5">
+            <p>Thank you! Your Windows 11 Pro key will be sent to your email shortly.</p>
+            <img src="https://i.imgur.com/fDyRPLb.png" class="wumpus" id="wumpus" alt="Wumpus">
+        </div>
+
+        <!-- No Scam Guarantee Section -->
+        <div class="no-scam">
+            <h3><img src="https://i.imgur.com/xpzgjpa.png" alt="Check Icon"> No Scam Guarantee</h3>
+            <p>We ensure that your Windows 11 Pro key will be sent securely and swiftly to your provided email address after you complete the steps. We value your trust and guarantee a fair trade. Your information is protected and never shared.</p>
+        </div>
+    </div>
+
+    <script>
+        function nextStage(stage) {
+            document.getElementById('stage' + stage).classList.remove('active');
+            document.getElementById('stage' + (stage + 1)).classList.add('active');
+            updateTimeline(stage + 1);
+            if (stage === 4) {
+                document.getElementById('wumpus').classList.add('active');
+            }
+        }
+
+        function updateTimeline(stage) {
+            const circles = document.querySelectorAll('.timeline .circle');
+            circles.forEach((circle, index) => {
+                if (index < stage) {
+                    circle.classList.add('active');
+                } else {
+                    circle.classList.remove('active');
+                }
+            });
+
+            const progressBar = document.getElementById('progressBar');
+            const progress = ((stage - 1) / (circles.length - 1)) * 100;
+            progressBar.style.width = progress + '%';
+        }
+
+        function finishTrade() {
+            nextStage(4);
+            // Simulate sending data to a server
+            setTimeout(function() {
+                alert('Trade completed successfully! Check your email for the key.');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
